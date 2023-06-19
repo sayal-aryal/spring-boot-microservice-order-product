@@ -29,7 +29,7 @@ public class AuthConfig  {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/auth/register", "/auth/token", "/auth/validate").permitAll());
+                        auth.requestMatchers("/auth/register", "/auth/login", "/auth/validate").permitAll());
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
