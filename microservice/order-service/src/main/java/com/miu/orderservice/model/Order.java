@@ -1,7 +1,8 @@
 package com.miu.orderservice.model;
 
-import com.miu.orderservice.Enum.Status;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -13,9 +14,11 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private Long product_id;
+    @NotNull
     private LocalDateTime orderDate;
-
+    @NotEmpty
     private String status;
 
     public Order(Long product_id, LocalDateTime orderDate, String status) {

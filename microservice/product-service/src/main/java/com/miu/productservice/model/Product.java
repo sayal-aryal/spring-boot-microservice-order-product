@@ -1,6 +1,8 @@
 package com.miu.productservice.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -9,9 +11,13 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String category;
+    @NotNull
     private double price;
+    @NotNull
     private Integer quantity;
 
     public Product(String name, String category, double price, Integer quantity) {
