@@ -26,6 +26,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
     @Override
     public GatewayFilter apply(Config config) {
+        System.out.println("Inside the filter");
         return ((exchange, chain) -> {
             if (validator.isSecured.test(exchange.getRequest())) {
                 //header contains token or not
@@ -44,7 +45,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 //                    /
 //                    template.getForObject("http://IDENTITY-SERVICE//validate?token" + authHeader, String.class);
                     jwtUtil.validateToken(authHeader);
-
+                    var role = jwtUtil.getClaims(authHeader).get("role");
                 } catch (Exception e) {
                     System.out.println("invalid access...!");
                     throw new RuntimeException("un authorized access to application");

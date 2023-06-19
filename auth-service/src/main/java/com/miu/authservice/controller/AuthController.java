@@ -4,7 +4,6 @@ import com.miu.authservice.dto.AuthRequest;
 import com.miu.authservice.model.UserCredential;
 import com.miu.authservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,19 +29,17 @@ public class AuthController {
     public String getToken(@RequestBody AuthRequest authRequest) {
         try {
             Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+
             if (authenticate.isAuthenticated()) {
-                return service.generateToken(authRequest.getUsername());
+                return service.generateToken(authRequest.getUsername(),authenticate.getAuthorities().stream().findFirst().get().toString());
             } else {
                 return "Invalid Access";
 //                throw new RuntimeException("Invalid Access");
-
             }
         } catch (Exception e) {
             return "Invalid Access";
 //            throw new RuntimeException("Invalid Access");
         }
-
-
     }
 
     @GetMapping("/validate")
