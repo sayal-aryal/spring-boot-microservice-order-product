@@ -42,7 +42,8 @@ public class OrderService {
         if (order.get().getStatus().equals(Status.SUCCESS.getName())) {
 
             //Getting the product By ID
-            ProductResponse product = webClient.get().uri("http://localhost:8082/products/{id}", order.get().getProduct_id()).retrieve().bodyToMono(ProductResponse.class)//to retrieve format in ProductResponse
+            ProductResponse product = webClient.get().uri("http://localhost:8082/products/{id}", order.get().getProduct_id())
+                    .retrieve().bodyToMono(ProductResponse.class)//to retrieve format in ProductResponse
                     .block();//to receive Synchronous Request
             product.setQuantity(product.getQuantity() + 1);
             //Updating the product after order has been cancelled

@@ -27,7 +27,7 @@ public class OrderController {
             if(orderService.cancel(id)) {
                  message = "Order cancelled successfully for order ID: " + id;
             } else{
-                message = "Unable of Order of "+id+" has been already cancelled " ;
+                message = "Order of "+id+" has been already cancelled " ;
             }
 
 

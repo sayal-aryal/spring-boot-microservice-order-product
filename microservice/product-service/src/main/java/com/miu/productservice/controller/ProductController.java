@@ -28,7 +28,7 @@ public class ProductController {
     //creating a delete mapping that deletes a specified product
     @DeleteMapping("/products/{id}")
     private ResponseEntity<Void> delete(@PathVariable("id") Long id) {
-
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -41,7 +41,8 @@ public class ProductController {
 
     //creating put mapping that updates the product detail
     @PutMapping("/products/{id}")
-    private ResponseEntity<Product> update(@RequestBody Product product) {
+    private ResponseEntity<Product> update(@PathVariable("id") Long id, @RequestBody Product product) {
+        product.setId(id);
         service.saveOrUpdate(product);
         return ResponseEntity.status(HttpStatus.OK).body(service.saveOrUpdate(product));
     }
